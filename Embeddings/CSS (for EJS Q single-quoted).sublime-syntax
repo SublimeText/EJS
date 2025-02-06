@@ -1,0 +1,9 @@
+%YAML 1.2
+---
+scope: source.css.embedded.html.ejs.questionmark.single-quoted
+version: 2
+hidden: true
+
+extends:
+  - CSS (for EJS P single-quoted).sublime-syntax
+  - CSS (for EJS Q).sublime-syntax

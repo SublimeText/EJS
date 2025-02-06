@@ -1,10 +1,10 @@
 <snippet>
 	<content><![CDATA[
-<% for (var i = 0; i < ${1:length}; i++) { -%>
+${TM_TEMPLATE_START} for (var i = 0; i < ${1:length}; i++) { -${TM_TEMPLATE_END}
 	$2
-<% } -%>$0
+${TM_TEMPLATE_START} } -${TM_TEMPLATE_END}$0
 ]]></content>
 	<tabTrigger>for</tabTrigger>
-	<scope>text.ejs.percentsign - source.js</scope>
-	<description>  &lt;% for (...) { -%&gt;</description>
+	<scope>text.html.ejs - text.html.ejs source.js</scope>
+	<description>&lt;% for (...) { -%&gt;</description>
 </snippet>

@@ -1,0 +1,285 @@
+/*SYNTAX TEST "EJS.sublime-syntax" */
+
+    <%#%>
+/*  ^^^^^ text.html - text.html text.html - source */
+/*  ^^^^^ meta.embedded.ejs comment.block.ejs - meta.embedded meta.embedded */
+/*  ^^^ punctuation.definition.comment.begin.ejs */
+/*     ^^ punctuation.definition.comment.end.ejs */
+
+    <%# Comment tag, no execution, no output %>
+/*  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.block.ejs */
+/*  ^^^ punctuation.definition.comment.begin.ejs */
+/*                                           ^^ punctuation.definition.comment.end.ejs */
+
+    <%%>
+/*  ^^^^ text.html - text.html text.html - source */
+/*  ^^^^ meta.embedded.ejs - meta.embedded meta.embedded */
+/*  ^^ punctuation.section.embedded.begin.ejs */
+/*    ^^ punctuation.section.embedded.end.ejs */
+
+    <%  "'Scriptlet' tag, for control-flow, no output" %>
+/*  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.ejs */
+/*  ^^ punctuation.section.embedded.begin.ejs */
+/*    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.js.embedded.ejs */
+/*                                                     ^^ punctuation.section.embedded.end.ejs */
+    <%_ " 'Whitespace Slurping' Scriptlet tag, strips all whitespace before it" _%>
+/*  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.ejs */
+/*  ^^^ punctuation.section.embedded.begin.ejs */
+/*     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.js.embedded.ejs */
+/*                                                                              ^^^ punctuation.section.embedded.end.ejs */
+    <%= " Outputs the value into the template (escaped)" %>
+/*  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.ejs */
+/*  ^^^ punctuation.section.embedded.begin.ejs */
+/*     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.js.embedded.ejs */
+/*                                                       ^^ punctuation.section.embedded.end.ejs */
+
+    <%- " Outputs the unescaped value into the template" -%>
+/*  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.ejs */
+/*  ^^^ punctuation.section.embedded.begin.ejs */
+/*     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.js.embedded.ejs */
+/*                                                       ^^^ punctuation.section.embedded.end.ejs */
+
+    <%% Literal tags %%>
+/*  ^^^^^^^^^^^^^^^^^^^^ - meta.embedded - punctuation */
+
+<% if (user) { %>
+/*^^^^^^^^^^^^^^^ meta.embedded.ejs */
+/* <- punctuation.section.embedded.begin.ejs */
+/*^^^^^^^^^^^^^ source.js.embedded.ejs */
+/* ^^^^^^^^^^^^ meta.conditional.js */
+/* ^^ keyword.control.conditional.if.js */
+/*    ^^^^^^ meta.group.js */
+/*    ^ punctuation.section.group.begin.js */
+/*     ^^^^ variable.other.readwrite.js */
+/*         ^ punctuation.section.group.end.js */
+/*           ^^ meta.block.js */
+/*           ^ punctuation.section.block.begin.js */
+/*             ^^ punctuation.section.embedded.end.ejs */
+
+  <h2><%= user.name %></h2>
+/*^^^^ meta.tag.block.any.html */
+/*^ punctuation.definition.tag.begin.html */
+/* ^^ entity.name.tag.block.any.html */
+/*   ^ punctuation.definition.tag.end.html */
+/*    ^^^^^^^^^^^^^^^^ meta.embedded.ejs */
+/*    ^^^ punctuation.section.embedded.begin.ejs */
+/*       ^^^^^^^^^^^ source.js.embedded.ejs */
+/*        ^^^^ variable.other.readwrite.js */
+/*            ^ punctuation.accessor.js */
+/*             ^^^^ meta.property.object.js */
+/*                  ^^ punctuation.section.embedded.end.ejs */
+/*                    ^^^^^ meta.tag.block.any.html */
+/*                    ^^ punctuation.definition.tag.begin.html */
+/*                      ^^ entity.name.tag.block.any.html */
+/*                        ^ punctuation.definition.tag.end.html */
+
+  <tag class<% attr %>="class-<% name() %>" />
+/*          ^^^^^^^^^^ meta.attribute-with-value.html entity.other.attribute-name.html meta.embedded.ejs */
+/*          ^^ punctuation.section.embedded.begin.ejs */
+/*             ^^^^ variable.other */
+/*                  ^^ punctuation.section.embedded.end.ejs */
+/*                     ^^^^^^^ meta.attribute-with-value.html meta.string.html string.quoted.double.html */
+/*                            ^^^^^^^^^^^^ meta.attribute-with-value.html meta.string.html meta.embedded.ejs */
+/*                                        ^ meta.attribute-with-value.html meta.string.html string.quoted.double.html */
+
+  <<%tag%> <%attr%>=<%value%>>
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.other.html */
+/*^ punctuation.definition.tag.begin.html */
+/* ^^^^^^^ entity.name.tag.other.html meta.embedded.ejs */
+/* ^^ punctuation.section.embedded.begin.ejs */
+/*   ^^^ source.js.embedded.ejs variable.other.readwrite.js */
+/*      ^^ punctuation.section.embedded.end.ejs */
+/*         ^^^^^^^^^^^^^^^^^^ meta.attribute-with-value.html */
+/*         ^^^^^^^^ entity.other.attribute-name.html meta.embedded.ejs */
+/*         ^^ punctuation.section.embedded.begin.ejs */
+/*           ^^^^ source.js.embedded.ejs variable.other.readwrite.js */
+/*               ^^ punctuation.section.embedded.end.ejs */
+/*                 ^ punctuation.separator.key-value.html */
+/*                  ^^^^^^^^^ meta.string.html meta.embedded.ejs */
+/*                  ^^ punctuation.section.embedded.begin.ejs */
+/*                    ^^^^^ source.js.embedded.ejs variable.other.readwrite.js */
+/*                         ^^ punctuation.section.embedded.end.ejs */
+/*                           ^ punctuation.definition.tag.end.html */
+
+<% } %>
+/*^^^^^ meta.embedded.ejs */
+/* <- punctuation.section.embedded.begin.ejs */
+/*^^^ source.js.embedded.ejs */
+/* ^ punctuation.section.block.end.js */
+/*   ^^ punctuation.section.embedded.end.ejs */
+
+<% console.log("%> <strong> any text </strong> <%"); %>
+/*^^^^^^^^^^^^^^^^ meta.embedded.ejs */
+/* <- punctuation.section.embedded.begin.ejs */
+/*^^^^^^^^^^^^^^ source.js.embedded.ejs */
+/* ^^^^^^^ support.type.object.console.js */
+/*        ^ punctuation.accessor.js */
+/*         ^^^ meta.function-call support.function.console.js */
+/*            ^^ meta.function-call meta.group.js */
+/*            ^ punctuation.section.group.begin.js */
+/*             ^ meta.string.js string.quoted.double.js punctuation.definition.string.begin.js */
+/*              ^^ punctuation.section.embedded.end.ejs */
+/*                 ^^^^^^^^ meta.tag.inline.any.html */
+/*                 ^ punctuation.definition.tag.begin.html */
+/*                  ^^^^^^ entity.name.tag.inline.any.html */
+/*                        ^ punctuation.definition.tag.end.html */
+/*                                   ^^^^^^^^^ meta.tag.inline.any.html */
+/*                                   ^^ punctuation.definition.tag.begin.html */
+/*                                     ^^^^^^ entity.name.tag.inline.any.html */
+/*                                           ^ punctuation.definition.tag.end.html */
+/*                                             ^^^^^^^^ meta.embedded.ejs */
+/*                                             ^^ punctuation.section.embedded.begin.ejs */
+/*                                               ^^^^ source.js.embedded.ejs */
+/*                                               ^^ meta.function-call meta.group.js */
+/*                                               ^ meta.string.js string.quoted.double.js punctuation.definition.string.end.js */
+/*                                                ^ punctuation.section.group.end.js */
+/*                                                 ^ punctuation.terminator.statement.js */
+/*                                                   ^^ punctuation.section.embedded.end.ejs */
+
+<style>
+/*<- meta.tag.style.begin.html punctuation.definition.tag.begin.html */
+/*^^^^^ meta.tag.style.begin.html */
+/*^^^^ entity.name.tag.style.html */
+/*    ^ punctuation.definition.tag.end.html */
+
+    /* comment <% print("any" + my.comment) %> block */
+/*  ^^^^^^^^^^^ comment.block.css */
+/*  ^^ punctuation.definition.comment.begin.css */
+/*             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.ejs */
+/*             ^^ punctuation.section.embedded.begin.ejs */
+/*               ^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.js.embedded.ejs */
+/*                                          ^^ punctuation.section.embedded.end.ejs */
+/*                                            ^^^^^^^^^ comment.block.css */
+/*                                                   ^^ punctuation.definition.comment.end.css */
+
+    /* can't support interruption in strings */
+    <% print("A %> string <% value") %>;
+/*  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.ejs */
+/*  ^^ punctuation.section.embedded.begin.ejs */
+/*              ^^ - punctuation.section */
+/*                        ^^ - punctuation.section */
+/*                                   ^^ punctuation.section.embedded.end.ejs */
+
+    /* embeddings in selectors maintain JS contexts */
+    <% print("A" %> string <% "value") %>;
+/*  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.css.embedded.html meta.selector.css */
+/*  ^^^^^^^^^^^^^^^ meta.embedded.ejs */
+/*          ^^^^^ meta.function-call meta.group.js */
+/*                         ^^^^^^^^^^^^^^ meta.embedded.ejs */
+
+    <% /* <% print("something") %> */ %>;
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.css.embedded.html */
+/*  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.ejs */
+/*  ^^ punctuation.section.embedded.begin.ejs */
+/*    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.js.embedded.ejs */
+/*     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ comment.block.js */
+/*     ^^ punctuation.definition.comment.begin.js */
+/*                                 ^^ punctuation.definition.comment.end.js */
+/*                                    ^^ punctuation.section.embedded.end.ejs */
+
+    .<% class %> { <% property %>: <% value %>; }
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.css.embedded.html */
+/*^^ - meta.selector - meta.embedded */
+/*  ^ meta.selector.css - meta.embedded */
+/*   ^^^^^^^^^^^ meta.selector.css meta.embedded.ejs */
+/*              ^ meta.selector.css - meta.embedded */
+/*               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css */
+/*                 ^^^^^^^^^^^^^^ meta.property-name.css meta.embedded.ejs */
+/*                                ^ meta.property-value.css - meta.string */
+/*                                 ^^^^^^^^^^^ meta.property-value.css meta.embedded.ejs */
+/*  ^^^^^^^^^^^^ entity.other.attribute-name.class.css */
+/*  ^ punctuation.definition.entity.css */
+/*   ^^ punctuation.section.embedded.begin.ejs */
+/*     ^^^^^^^ source.js.embedded.ejs */
+/*            ^^ punctuation.section.embedded.end.ejs */
+/*               ^ punctuation.section.block.begin.css */
+/*                 ^^^^^^^^^^^^^^ support.type.property-name.css */
+/*                 ^^ punctuation.section.embedded.begin.ejs */
+/*                             ^^ punctuation.section.embedded.end.ejs */
+/*                               ^ punctuation.separator.key-value.css */
+/*                                 ^^ punctuation.section.embedded.begin.ejs */
+/*                                   ^^^^^^^ source.js.embedded.ejs */
+/*                                          ^^ punctuation.section.embedded.end.ejs */
+/*                                            ^ punctuation.terminator.rule.css */
+/*                                              ^ punctuation.section.block.end.css */
+
+    <% tag %> { font-family: "Arial <% font.variant %>"; }
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.css.embedded.html */
+/*^^ - meta.selector - meta.embedded */
+/*  ^^^^^^^^^ meta.selector.css meta.embedded.ejs */
+/*           ^ meta.selector.css - meta.embedded */
+/*            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css */
+/*              ^^^^^^^^^^^ meta.property-name.css */
+/*                          ^ meta.property-value.css - meta.string */
+/*                           ^^^^^^^ meta.property-value.css meta.string.css - meta.embedded */
+/*                                  ^^^^^^^^^^^^^^^^^^ meta.property-value.css meta.string.css meta.embedded.ejs */
+/*                                                    ^ meta.property-value.css meta.string.css - meta.embedded */
+/*  ^^ punctuation.section.embedded.begin.ejs */
+/*    ^^^^^ source.js.embedded.ejs */
+/*         ^^ punctuation.section.embedded.end.ejs */
+/*            ^ punctuation.section.block.begin.css */
+/*              ^^^^^^^^^^^ support.type.property-name.css */
+/*                         ^ punctuation.separator.key-value.css */
+/*                           ^^^^^^^ string.quoted.double.css */
+/*                           ^ punctuation.definition.string.begin.css */
+/*                                  ^^ punctuation.section.embedded.begin.ejs */
+/*                                    ^^^^^^^^^^^^^^ source.js.embedded.ejs */
+/*                                                  ^^ punctuation.section.embedded.end.ejs */
+/*                                                    ^ string.quoted.double.css punctuation.definition.string.end.css */
+/*                                                     ^ punctuation.terminator.rule.css */
+/*                                                       ^ punctuation.section.block.end.css */
+
+    <% if (wantThis()) { %>
+/*^^^^^^^^^^^^^^^^^^^^^^^^^ source.css.embedded.html */
+/*  ^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.ejs */
+/*  ^^ punctuation.section.embedded.begin.ejs */
+/*    ^^^^^^^^^^^^^^^^^^^ source.js.embedded.ejs */
+/*                     ^^ meta.block.js */
+/*                     ^ punctuation.section.block.begin.js */
+/*                       ^^ punctuation.section.embedded.end.ejs */
+
+    <% tag %> { font-family: "Arial <% font.variant %>"; }
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.css.embedded.html */
+/*^^ meta.selector.css - meta.embedded */
+/*  ^^^^^^^^^ meta.selector.css meta.embedded.ejs */
+/*           ^ meta.selector.css - meta.embedded */
+/*            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css */
+/*              ^^^^^^^^^^^ meta.property-name.css */
+/*                          ^ meta.property-value.css - meta.string */
+/*                           ^^^^^^^ meta.property-value.css meta.string.css - meta.embedded */
+/*                                  ^^^^^^^^^^^^^^^^^^ meta.property-value.css meta.string.css meta.embedded.ejs */
+/*                                                    ^ meta.property-value.css meta.string.css - meta.embedded */
+
+    <% } %>
+/*  ^^^^^^^ source.css.embedded.html meta.embedded.ejs */
+/*  ^^ punctuation.section.embedded.begin.ejs */
+/*    ^^^ source.js.embedded.ejs */
+/*     ^ punctuation.section.block.end.js */
+/*       ^^ punctuation.section.embedded.end.ejs */
+
+</style>
+/*<- meta.tag.style.end.html punctuation.definition.tag.begin.html */
+/*^^^^^^ meta.tag.style.end.html */
+/* <- punctuation.definition.tag.begin.html */
+/*^^^^^ entity.name.tag.style.html */
+/*     ^ punctuation.definition.tag.end.html */
+
+<div style="color: <% locals.color["name"] %>">
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.tag.block.any.html */
+/*^^ entity.name.tag.block.any.html */
+/*   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.attribute-with-value.style.html */
+/*   ^^^^^ entity.other.attribute-name.style.html */
+/*        ^ punctuation.separator.key-value.html */
+/*         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.string.html */
+/*         ^ string.quoted.double.html punctuation.definition.string.begin.html */
+/*          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.css.embedded.html */
+/*                 ^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.ejs */
+/*                 ^^ punctuation.section.embedded.begin.ejs */
+/*                   ^^^^^^^^^^^^^^^^^^^^^^ source.js.embedded.ejs */
+/*                                ^^^^^^^^ meta.brackets.js */
+/*                                ^ punctuation.section.brackets.begin.js */
+/*                                 ^^^^^^ meta.string.js string.quoted.double.js */
+/*                                       ^ punctuation.section.brackets.end.js */
+/*                                         ^^ punctuation.section.embedded.end.ejs */
+/*                                           ^ string.quoted.double.html punctuation.definition.string.end.html */
+/*                                            ^ punctuation.definition.tag.end.html */

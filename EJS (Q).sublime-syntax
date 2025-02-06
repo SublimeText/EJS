@@ -1,10 +1,41 @@
 %YAML 1.2
 ---
+# https://github.com/mde/ejs
 name: EJS (<? ?>)
+scope: text.html.ejs.questionmark
 version: 2
-first_line_match: ^<\?
-scope: text.ejs.questionmark
-extends: Packages/EJS 2/EJS.sublime-syntax
+
+extends: EJS.sublime-syntax
 
 variables:
-  delimiter: '\?'
+
+  ejs_delimiter: '\?'
+
+contexts:
+
+  style-css-content:
+    - meta_include_prototype: false
+    - match: '{{style_content_begin}}'
+      captures:
+        1: comment.block.html punctuation.definition.comment.begin.html
+      pop: 1  # make sure to match only once
+      embed: scope:source.css.embedded.html.ejs.questionmark
+      embed_scope: source.css.embedded.html
+      escape: '{{style_content_end}}'
+      escape_captures:
+        1: source.css.embedded.html
+        2: comment.block.html punctuation.definition.comment.end.html
+        3: source.css.embedded.html
+        4: comment.block.html punctuation.definition.comment.end.html
+
+  tag-style-attribute-double-quoted-value-content:
+    - include: scope:source.css.embedded.html.ejs.questionmark.double-quoted
+      apply_prototype: true
+
+  tag-style-attribute-single-quoted-value-content:
+    - include: scope:source.css.embedded.html.ejs.questionmark.single-quoted
+      apply_prototype: true
+
+  ejs-content:
+    - include: JavaScript (for EJS Q).sublime-syntax
+      apply_prototype: true

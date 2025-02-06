@@ -1,12 +1,12 @@
 <snippet>
 	<content><![CDATA[
-<% if (${2:condition}) { -%>
+${TM_TEMPLATE_START} if (${2:condition}) { -${TM_TEMPLATE_END}
 	$3${1:
-<% \} else { -%>
+${TM_TEMPLATE_START} \} else { -${TM_TEMPLATE_END}
 	$4}
-<% } -%>$0
+${TM_TEMPLATE_START} } -${TM_TEMPLATE_END}$0
 ]]></content>
 	<tabTrigger>if</tabTrigger>
-	<scope>text.ejs.percentsign - source.js</scope>
+	<scope>text.html.ejs - text.html.ejs source.js</scope>
 	<description>&lt;% if () { %&gt; &lt;% } else { %&gt;</description>
 </snippet>

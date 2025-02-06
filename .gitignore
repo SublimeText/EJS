@@ -1,0 +1,11 @@
+# MacOS specific ignores
+.DS_Store
+
+# development
+.sublime/
+.venv/
+.vscode/
+
+# python cache files
+__pycache__/
+*.pyc

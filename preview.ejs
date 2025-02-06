@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= locals.title %></title>
+
+	<%# Styles %>
+	<link rel="<%- locals.type %>" type="text/css" href="/css/common.css">
+	<%
+		const styles = locals styles;
+		const stylesLength = styles ? styles.length : 0;
+		for (let i = 0; i < stylesLength; i++) { -%>
+			<link rel="stylesheet" type="text/css" href="/css/ <%- styles[i] %>.css">
+		<% }
+	-%>
+	<style>
+		.<% class %> {
+			<% property %>: <% value %>;
+		}
+	</style>
+</head>
+<body>
+	<%- include('body') -%>
+	<%- include core/footer %>
+</body>
+</html>
+
+

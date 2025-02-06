@@ -1,0 +1,13 @@
+%YAML 1.2
+---
+scope: source.js.embedded.css.ejs.questionmark
+version: 2
+hidden: true
+
+extends: JavaScript (for CSS EJS P).sublime-syntax
+
+variables:
+
+  # EJS variables
+
+  ejs_delimiter: '\?'
