@@ -37,7 +37,7 @@ To open files with a different extension as EJS, or to use delimiters other than
 
 1. Open an EJS file
 2. Select `View` from the menu bar
-3. Then select: `Syntax` &rarr; `Open all with current extension as...` &rarr; `EJS 2` &rarr; `EJS (<delimiter>)`
+3. Then select: `Syntax` &rarr; `Open all with current extension as...` &rarr; `EJS` &rarr; `EJS (<delimiter>)`
 4. Repeat for each extension you want to open as EJS
 
 ## Snippets
