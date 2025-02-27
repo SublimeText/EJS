@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plist version="1.0">
+<dict>
+	<key>scope</key>
+	<string>text.html.ejs.questionmark</string>
+	<key>settings</key>
+	<dict>
+		<key>shellVariables</key>
+		<array>
+			<dict>
+				<!-- Syntax specific block snippet content indentation -->
+				<key>name</key>
+				<string>TM_TEMPLATE_INDENT</string>
+				<key>value</key>
+				<string><![CDATA[	]]></string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>TM_TEMPLATE_START</string>
+				<key>value</key>
+				<string><![CDATA[<?]]></string>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>TM_TEMPLATE_END</string>
+				<key>value</key>
+				<string><![CDATA[?>]]></string>
+			</dict>
+		</array>
+	</dict>
+</dict>
+</plist>

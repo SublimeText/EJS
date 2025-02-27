@@ -1,10 +1,33 @@
-# EJS 2
+# EJS
 
-[EJS](http://ejs.co/) syntax definition for Sublime Text 3 & 4. Includes EJS tag autocompletion and snippets.
+[EJS](http://ejs.co/) syntax definition for Sublime Text based on its HTML, CSS and JavaScript syntax definitions.
+
+Supported template tag variants are: `<% %>`. `<? ?>`.
+
+![preview](preview.png)
 
 ## Installation
 
-Use [Package Control](https://packagecontrol.io/docs/usage) to install [**EJS 2**](https://packagecontrol.io/packages/EJS%202).
+### Package Control
+
+The easiest way to install is using [Package Control](https://packagecontrol.io). It's listed as `EJS`.
+
+1. Open `Command Palette` using <kbd>ctrl+shift+P</kbd> or menu item `Tools → Command Palette...`
+2. Choose `Package Control: Install Package`
+3. Find `EJS` and hit <kbd>Enter</kbd>
+
+### Manual Install
+
+1. Download appropriate [EJS.sublime-package](https://github.com/SublimeText/EJS/releases) for your Sublime Text build.
+2. Copy it into _Installed Packages_ directory
+
+> [!NOTE]
+>
+> To find _Installed Packages_...
+>
+> 1. call _Menu > Preferences > Browse Packages.._
+> 2. Navigate to parent folder
+
 
 ### Setting the default syntax
 
@@ -17,27 +40,45 @@ To open files with a different extension as EJS, or to use delimiters other than
 3. Then select: `Syntax` &rarr; `Open all with current extension as...` &rarr; `EJS 2` &rarr; `EJS (<delimiter>)`
 4. Repeat for each extension you want to open as EJS
 
-This package includes syntax definitions for the following additional delimiters: `<? ?>`, `<$ $>`, `<@ @>`.
-
-### Color Scheme
-
-`EJS 2` comes with the `Dracula EJS` color scheme, which is a modified/updated version of [zertosh](https://github.com/zertosh)’s old dracula theme. You can select it from: `Preferences` &rarr; `Color Scheme`.
-
-[`Oceanic Next`](https://github.com/voronianski/oceanic-next-color-scheme) is also a good color scheme for EJS that works right out of the box.
-
-If you'd prefer to use a different color scheme, you may need to add lines like [these](https://github.com/nwoltman/sublime-ejs/blob/a7cceaf26f3c3dd0ea4d64f9303c95d632f9d9e4/Dracula%20EJS.YAML-tmTheme#L273-L286) to make the highlighting more compatible with EJS.
-
-#### Preview (with *Dracula EJS*)
-
-![](example.png)
-
-### Snippets
+## Snippets
 
 In the HTML scope:
 
 + `if`+`TAB` - Inserts EJS `if` statement
 + `for`+`TAB` - Inserts EJS `for` loop
 
+## Troubleshooting
+
+### §1 Syntax Definition Parse Errors
+
+EJS extends Sublime Text's HTML, CSS and JavaScript syntax definition.
+
+If EJS syntax highlighting doesn't work 
+and console displays syntax errors in _Vue Component.sublime-syntax_,
+please make sure to remove any out-dated syntax override.
+
+Steps:
+
+1. call _Menu > Preferences > Browse Packages.._
+2. Look for _HTML_, _CSS_ or _JavaScript_ folder
+3. Remove them or at least delete any syntax definition in it.
+
+### §2 Scripts are not correctly highlighted
+
+EJS relies on JavaScript (`source.js`)
+to scope script blocks and inline scripts.
+
+Make sure to remove related out-dated syntax packages,
+which don't meet least compatibility requirements.
+
+They can be identified by calling 
+e.g. `sublime.find_syntax_by_scope("source.js")` in ST's console.
+
+Known candidates are:
+
+- [JavaScriptNext - ES6 Syntax](https://packagecontrol.io/packages/JavaScriptNext%20-%20ES6%20Syntax)
+- [Naomi](https://github.com/borela/naomi)
+
 ## Contributing
 
-Most problems are best addressed by opening an [issue](https://github.com/nwoltman/sublime-ejs/issues).
+Most problems are best addressed by opening an [issue](https://github.com/SublimeText/EJS/issues).

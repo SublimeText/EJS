@@ -1,0 +1,50 @@
+name: CI Syntax Tests
+
+on:
+  push:
+    branches:
+      - master
+    tags-ignore:
+      - '**'
+    paths:
+      - '.github/workflows/ci-syntax-tests.yml'
+      - '**.sublime-syntax'
+      - '**/syntax_test_*'
+  pull_request:
+    paths:
+      - '.github/workflows/ci-syntax-tests.yml'
+      - '**.sublime-syntax'
+      - '**/syntax_test_*'
+  workflow_dispatch:
+
+jobs:
+  syntax_tests:
+    name: Sublime Text ${{ matrix.build }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15  # default is 6 hours!
+    strategy:
+      matrix:
+        include:
+          # Stable ST4 builds
+          - build: 4152
+            default_packages: binary
+          - build: 4169
+            default_packages: binary
+          - build: 4180
+            default_packages: binary
+          - build: 4192
+            default_packages: binary
+          # Latest dev build (and latest available maybe unreleased syntaxes)
+          - build: latest
+            default_packages: master
+    steps:
+      - name: Checkout EJS
+        uses: actions/checkout@v4
+        with:
+          path: EJS
+      - uses: SublimeText/syntax-test-action@v2
+        with:
+          build: ${{ matrix.build }}
+          package_name: EJS
+          package_root: EJS
+          default_packages: ${{ matrix.default_packages }}

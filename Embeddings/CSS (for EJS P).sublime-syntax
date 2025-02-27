@@ -1,0 +1,101 @@
+%YAML 1.2
+---
+scope: source.css.embedded.html.ejs
+version: 2
+hidden: true
+
+extends: Packages/CSS/CSS.sublime-syntax
+
+variables:
+
+  # CSS variables
+
+  ident_start: (?:{{nmstart}}|{{ejs_tag_start}})
+
+  # EJS variables
+
+  ejs_delimiter: '%'
+
+  ejs_commet_start: '<{{ejs_delimiter}}#'
+  ejs_tag_start: '<{{ejs_delimiter}}(?:[=_-]|(?!{{ejs_delimiter}}[^>]))'
+  ejs_tag_end: '[_-]?{{ejs_delimiter}}>'
+
+contexts:
+  prototype:
+    - meta_prepend: true
+    - include: ejs-embedded
+
+  block-comment-body:
+    - meta_prepend: true
+    - meta_include_prototype: false
+    - include: ejs-interpolations
+
+  string-content:
+    - meta_prepend: true
+    - include: ejs-interpolations
+
+  at-supports-group-body:
+    # required until PR #3785 (ST 4157)
+    - meta_prepend: true
+    - meta_include_prototype: false
+
+  property-list-body:
+    # required until PR #3785 (ST 4157)
+    - meta_prepend: true
+    - meta_include_prototype: false
+
+  stylesheet-block-body:
+    # required until PR #3785 (ST 4157)
+    - meta_prepend: true
+    - meta_include_prototype: false
+
+###[ EJS TAGS ]###############################################################
+
+  ejs-embedded:
+    - match: '{{ejs_commet_start}}'
+      scope: punctuation.definition.comment.begin.ejs
+      push: ejs-embedded-comment-body
+    - match: '{{ejs_tag_start}}'
+      scope: punctuation.section.embedded.begin.ejs
+      push: ejs-embedded-body
+
+  ejs-embedded-comment-body:
+    - meta_include_prototype: false
+    - meta_scope: meta.embedded.ejs comment.block.ejs
+    - match: '{{ejs_tag_end}}'
+      scope: punctuation.definition.comment.end.ejs
+      pop: 1
+
+  ejs-embedded-body:
+    - meta_include_prototype: false
+    - meta_scope: meta.embedded.ejs
+    - meta_content_scope: source.js.embedded.ejs
+    - match: '{{ejs_tag_end}}'
+      scope: punctuation.section.embedded.end.ejs
+      pop: 1
+    - include: ejs-content
+
+  ejs-interpolations:
+    - match: '{{ejs_commet_start}}'
+      scope: punctuation.definition.comment.begin.ejs
+      push: ejs-interpolation-comment-body
+    - match: '{{ejs_tag_start}}'
+      scope: punctuation.section.embedded.begin.ejs
+      push: ejs-interpolation-body
+
+  ejs-interpolation-comment-body:
+    - clear_scopes: 1
+    - meta_include_prototype: false
+    - meta_scope: meta.embedded.ejs comment.block.ejs
+    - include: ejs-embedded-comment-body
+
+  ejs-interpolation-body:
+    - clear_scopes: 1
+    - meta_include_prototype: false
+    - meta_scope: meta.embedded.ejs
+    - meta_content_scope: source.js.embedded.ejs
+    - include: ejs-embedded-body
+
+  ejs-content:
+    - include: JavaScript (for CSS EJS P).sublime-syntax
+      apply_prototype: true

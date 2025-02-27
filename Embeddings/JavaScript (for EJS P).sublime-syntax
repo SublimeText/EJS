@@ -1,0 +1,75 @@
+%YAML 1.2
+---
+scope: source.js.embedded.html.ejs
+version: 2
+hidden: true
+
+extends: Packages/JavaScript/JavaScript.sublime-syntax
+
+variables:
+
+  # EJS variables
+
+  ejs_delimiter: '%'
+
+  ejs_commet_start: '<{{ejs_delimiter}}#'
+  ejs_tag_start: '<{{ejs_delimiter}}(?:[=_-]|(?!{{ejs_delimiter}}[^>]))'
+  ejs_tag_end: '[_-]?{{ejs_delimiter}}>'
+
+contexts:
+
+  main:
+    - include: script
+
+  script:
+    - meta_prepend: true
+    - match: \}
+      scope: punctuation.section.block.end.js
+    - match: \]
+      scope: punctuation.section.brackets.end.js
+    - match: \)
+      scope: punctuation.section.group.end.js
+
+  statements:
+    # if in nested context, push nested HTML syntax
+    - meta_prepend: true
+    - include: nested-ejs
+
+  statement:
+    - meta_prepend: true
+    - match: (?={{ejs_tag_end}})
+      pop: 1
+
+  expression-begin:
+    # if in nested context, push nested HTML syntax
+    - meta_prepend: true
+    - include: nested-ejs
+
+  expression-end:
+    - meta_prepend: true
+    - match: (?={{ejs_tag_end}})
+      pop: 1
+
+  string-content:
+    # if in nested context, push nested HTML syntax
+    - meta_prepend: true
+    - include: nested-ejs
+
+  nested-ejs:
+    - match: '{{ejs_tag_end}}'
+      scope: punctuation.section.embedded.end.ejs
+      push: nested-ejs-body
+
+  nested-ejs-body:
+    - clear_scopes: true
+    - meta_include_prototype: false
+    - meta_scope: text.html.ejs.percentsign meta.embedded.ejs
+    - meta_content_scope: source.js.embedded.ejs
+    - match: '{{ejs_tag_start}}'
+      scope: punctuation.section.embedded.begin.ejs
+      pop: 1
+    - include: ejs-content
+
+  ejs-content:
+    - include: EJS.sublime-syntax
+      apply_prototype: true

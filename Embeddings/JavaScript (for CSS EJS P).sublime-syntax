@@ -1,0 +1,36 @@
+%YAML 1.2
+---
+scope: source.js.embedded.css.ejs
+version: 2
+hidden: true
+
+extends: Packages/JavaScript/JavaScript.sublime-syntax
+
+variables:
+
+  # EJS variables
+
+  ejs_delimiter: '%'
+
+  ejs_commet_start: '<{{ejs_delimiter}}#'
+  ejs_tag_start: '<{{ejs_delimiter}}(?:[=_-]|(?!{{ejs_delimiter}}[^>]))'
+  ejs_tag_end: '[_-]?{{ejs_delimiter}}>'
+
+contexts:
+
+  prototype:
+    - meta_prepend: true
+    - match: (?={{ejs_tag_end}})
+      pop: 1
+
+  main:
+    - include: script
+
+  script:
+    - meta_prepend: true
+    - match: \}
+      scope: punctuation.section.block.end.js
+    - match: \]
+      scope: punctuation.section.brackets.end.js
+    - match: \)
+      scope: punctuation.section.group.end.js

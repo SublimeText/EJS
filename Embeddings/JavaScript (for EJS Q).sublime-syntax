@@ -1,0 +1,19 @@
+%YAML 1.2
+---
+scope: source.js.embedded.html.ejs.questionmark
+version: 2
+hidden: true
+
+extends: JavaScript (for EJS P).sublime-syntax
+
+variables:
+
+  # EJS variables
+
+  ejs_delimiter: '\?'
+
+contexts:
+
+  ejs-content:
+    - include: EJS (Q).sublime-syntax
+      apply_prototype: true
