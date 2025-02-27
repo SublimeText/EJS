@@ -26,6 +26,8 @@ jobs:
       matrix:
         include:
           # Stable ST4 builds
+          - build: 4152
+            default_packages: binary
           - build: 4169
             default_packages: binary
           - build: 4180
