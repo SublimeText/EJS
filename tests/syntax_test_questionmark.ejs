@@ -162,7 +162,7 @@
 
     /* embeddings in selectors maintain JS contexts */
     <? print("A" ?> string <? "value") ?>;
-/*  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.css.embedded.html meta.selector.css */
+/*  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.css.embedded.html */
 /*  ^^^^^^^^^^^^^^^ meta.embedded.ejs */
 /*          ^^^^^ meta.function-call meta.group.js */
 /*                         ^^^^^^^^^^^^^^ meta.embedded.ejs */
@@ -205,9 +205,9 @@
 
     <? tag ?> { font-family: "Arial <? font.variant ?>"; }
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.css.embedded.html */
-/*^^ - meta.selector - meta.embedded */
-/*  ^^^^^^^^^ meta.selector.css meta.embedded.ejs */
-/*           ^ meta.selector.css - meta.embedded */
+/*^^ - meta.embedded */
+/*  ^^^^^^^^^ meta.embedded.ejs */
+/*           ^ - meta.embedded */
 /*            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css */
 /*              ^^^^^^^^^^^ meta.property-name.css */
 /*                          ^ meta.property-value.css - meta.string */
@@ -240,9 +240,9 @@
 
     <? tag ?> { font-family: "Arial <? font.variant ?>"; }
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ source.css.embedded.html */
-/*^^ meta.selector.css - meta.embedded */
-/*  ^^^^^^^^^ meta.selector.css meta.embedded.ejs */
-/*           ^ meta.selector.css - meta.embedded */
+/*^^ - meta.embedded */
+/*  ^^^^^^^^^ meta.embedded.ejs */
+/*           ^ - meta.embedded */
 /*            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.property-list.css meta.block.css */
 /*              ^^^^^^^^^^^ meta.property-name.css */
 /*                          ^ meta.property-value.css - meta.string */
