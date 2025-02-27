@@ -54,7 +54,7 @@ In the HTML scope:
 EJS extends Sublime Text's HTML, CSS and JavaScript syntax definition.
 
 If EJS syntax highlighting doesn't work 
-and console displays syntax errors in _Vue Component.sublime-syntax_,
+and console displays syntax errors in _EJS.sublime-syntax_,
 please make sure to remove any out-dated syntax override.
 
 Steps:
